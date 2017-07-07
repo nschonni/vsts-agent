@@ -159,8 +159,8 @@ namespace Microsoft.VisualStudio.Services.Agent.Listener.Configuration
             Trace.Info("Asking the user to restart the machine to launch agent and for autologon settings to take effect.");
             _terminal.WriteLine(StringUtil.Loc("RestartMessage"));
 
-            var shallRestart = command.GetRestartNow();
-            if (shallRestart)
+            var noRestart = command.GetNoRestart();
+            if (!noRestart)
             {
                 var whichUtil = HostContext.GetService<IWhichUtil>();
                 var shutdownExePath = whichUtil.Which("shutdown.exe");

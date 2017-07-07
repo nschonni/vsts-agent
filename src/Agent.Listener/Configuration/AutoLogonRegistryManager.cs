@@ -286,7 +286,7 @@ namespace Microsoft.VisualStudio.Services.Agent.Listener.Configuration
 
         private void UpdateScreenSaverSettings(CommandSettings command, string securityId)
         {
-            if(!command.GetDisableScreenSaver())
+            if(command.GetKeepScreenSaver())
             {
                 return;
             }

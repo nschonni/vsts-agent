@@ -30,13 +30,13 @@ namespace Microsoft.VisualStudio.Services.Agent.Listener
             Constants.Agent.CommandLine.Flags.AddDeploymentGroupTags,
             Constants.Agent.CommandLine.Flags.Commit,
             Constants.Agent.CommandLine.Flags.DeploymentGroup,
-            Constants.Agent.CommandLine.Flags.DisableScreenSaver,
+            Constants.Agent.CommandLine.Flags.KeepScreenSaver,
             Constants.Agent.CommandLine.Flags.EnableAutoLogon,
             Constants.Agent.CommandLine.Flags.Help,
             Constants.Agent.CommandLine.Flags.MachineGroup,
             Constants.Agent.CommandLine.Flags.Replace,
             Constants.Agent.CommandLine.Flags.RunAsService,
-            Constants.Agent.CommandLine.Flags.RestartNow,
+            Constants.Agent.CommandLine.Flags.NoRestart,
             Constants.Agent.CommandLine.Flags.Unattended,
             Constants.Agent.CommandLine.Flags.Version
         };
@@ -175,20 +175,20 @@ namespace Microsoft.VisualStudio.Services.Agent.Listener
                 defaultValue: false);
         }
 
-        public bool GetDisableScreenSaver()
+        public bool GetKeepScreenSaver()
         {
             return TestFlagOrPrompt(
-                name: Constants.Agent.CommandLine.Flags.DisableScreenSaver,
-                description: StringUtil.Loc("DisableScreenSaver"),
-                defaultValue: true);
+                name: Constants.Agent.CommandLine.Flags.KeepScreenSaver,
+                description: StringUtil.Loc("KeepScreenSaver"),
+                defaultValue: false);
         }
 
-        public bool GetRestartNow()
+        public bool GetNoRestart()
         {
             return TestFlagOrPrompt(
-                name: Constants.Agent.CommandLine.Flags.RestartNow,
-                description: StringUtil.Loc("RestartNow"),
-                defaultValue: true);
+                name: Constants.Agent.CommandLine.Flags.NoRestart,
+                description: StringUtil.Loc("NoRestart"),
+                defaultValue: false);
         }
 
         public bool GetDeploymentGroupTagsRequired()
