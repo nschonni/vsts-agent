@@ -339,7 +339,7 @@
   "NeedAdminForUnconfigWinServiceAgent": "Needs Administrator privileges for unconfiguring agent that running as windows service.",
   "NetworkServiceNotFound": "Cannot find network service account",
   "NoArtifactsFound": "No artifacts are available in the version '{0}'.",
-  "NoRestart": "restart the machine? (Y/N)",
+  "NoRestart": "Do you want to not restart the machine? (Y/N)",
   "NoRestartSuggestion": "It is recommended to restart the machine before using it for UI automation runs since autologon was enabled during agent configuration.",
   "NoSpaceOnDisk": "Skipping attachment as it exceeded the maximum allowed size or not available on disk: {0}",
   "NotLinux": "This Agent version is built for Linux. Please install a correct build for your OS.",
