@@ -12,11 +12,11 @@
   # Override working directory.
   - script: cd
     name: Override working directory
-    workingDirectory: $(USERPROFILE)
+    workingDirectory: $(agent.homeDirectory)
     condition: and(succeeded(), eq(variables['agent.os'], 'windows_nt'))
   - script: pwd
     name: Override working directory
-    workingDirectory: $(HOME)
+    workingDirectory: $(agent.homeDirectory)
     condition: and(succeeded(), in(variables['agent.os'], 'darwin', 'linux'))
 
   # Fail on stderr. By default, text written to stderr does not fail your task. Programs commonly write progress
