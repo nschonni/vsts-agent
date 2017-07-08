@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Net.Http;
@@ -34,7 +35,7 @@ namespace Microsoft.VisualStudio.Services.Agent.Worker
             ArgUtil.NotNull(message.Tasks, nameof(message.Tasks));
             Trace.Info("Job ID {0}", message.JobId);
 
-            // Agent.RunMode
+            // Set HostContext.RunMode
             RunMode runMode;
             if (message.Environment.Variables.ContainsKey(Constants.Variables.Agent.RunMode) &&
                 Enum.TryParse(message.Environment.Variables[Constants.Variables.Agent.RunMode], ignoreCase: true, result: out runMode) &&
@@ -97,7 +98,7 @@ namespace Microsoft.VisualStudio.Services.Agent.Worker
                     jobContext.AddIssue(new Issue() { Type = IssueType.Error, Message = errorMessage });
                 });
 
-                // Set agent version variable.
+                // Set agent.version
                 jobContext.Variables.Set(Constants.Variables.Agent.Version, Constants.Agent.Version);
                 jobContext.Output(StringUtil.Loc("AgentVersion", Constants.Agent.Version));
 
@@ -130,6 +131,7 @@ namespace Microsoft.VisualStudio.Services.Agent.Worker
                 jobContext.Variables.Set(Constants.Variables.Agent.JobName, message.JobName);
                 jobContext.Variables.Set(Constants.Variables.Agent.MachineName, Environment.MachineName);
                 jobContext.Variables.Set(Constants.Variables.Agent.Name, settings.AgentName);
+                jobContext.Variables.Set(Constants.Variables.Agent.OS, VarUtil.OS);
                 jobContext.Variables.Set(Constants.Variables.Agent.RootDirectory, IOUtil.GetWorkPath(HostContext));
 #if OS_WINDOWS
                 jobContext.Variables.Set(Constants.Variables.Agent.ServerOMDirectory, Path.Combine(IOUtil.GetExternalsPath(), Constants.Path.ServerOMDirectory));

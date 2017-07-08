@@ -1,0 +1,58 @@
+﻿# variables:
+#   - name: system.debug
+#     value: "true"
+
+steps:
+  # Simple script. Uses cmd.exe on Windows and Bash on macOS/Linux.
+  - script: echo hello world
+    name: Simple script
+
+  # Multi-line script
+  - script: |
+      echo hello from a...
+      echo ...multi-line script
+    name: Multi-line script
+
+  # Override working directory
+  - script: cd
+    name: Override working directory
+    workingDirectory: $(USERPROFILE)
+    condition: and(succeeded(), eq(variables['agent.os'], 'windows_nt'))
+  - script: pwd
+    name: Override working directory
+    workingDirectory: $(HOME)
+    condition: and(succeeded(), in(variables['agent.os'], 'darwin', 'linux'))
+
+  # Fail on stderr.
+  - script: echo hello from stderr 1>&2
+    name: Fail on stderr
+    failOnStderr: true    # failOnStderr instructs the script task to fail if anything was written to stderr.
+    continueOnError: true # However, we want to continue running the samples. Therefore, set continueOnError
+                          # so the task result will be SucceededWithIssues instead of Failed.
+  - script: "echo agent.jobStatus is $(agent.jobStatus)" # Verify the job status is SucceededWithIssues now.
+    name: "Print agent.jobStatus"
+
+  # Environment variables. Use env to map secrets variables into the environment for your script.
+  # Unless explicitly mapped, secret variables are not propagated to the environment of ad hoc scripts.
+  #
+  # First, create a secret variable. Normally these would be persisted securely by the definition.
+  - script: "echo ##vso[task.setvariable variable=MySecret;isSecret=true]My secret value"
+    name: Create secret variable
+    condition: and(succeeded(), eq(variables['agent.os'], 'windows_nt'))
+  - script: "echo \"##vso[task.setvariable variable=MySecret;isSecret=true]My secret value\""
+    name: Create secret variable
+    condition: and(succeeded(), in(variables['agent.os'], 'darwin', 'linux'))
+  # Next, map the secret into an environment variable and print it. Note, secrets are masked in the log
+  # and appear as '********' instead.
+  - script: echo The password is %MyPassword%
+    name: Print secret variable
+    env:
+      MyPassword: $(MySecret)
+    condition: and(succeeded(), eq(variables['agent.os'], 'windows_nt'))
+  - script: echo The password is $MyPassword
+    name: Print secret variable
+    env:
+      MyPassword: $(MySecret)
+    condition: and(succeeded(), in(variables['agent.os'], 'darwin', 'linux'))
+
+  # - script: printenv|sort

@@ -17,8 +17,7 @@ namespace Microsoft.VisualStudio.Services.Agent.Worker
 
         public static async Task<int> MainAsync(IHostContext context, string[] args)
         {
-            //ITerminal registers a CTRL-C handler, which keeps the Agent.Worker process running
-            //and lets the Agent.Listener handle gracefully the exit.
+            // ITerminal registers a CTRL-C handler.
             var term = context.GetService<ITerminal>();
             Tracing trace = context.GetTrace(nameof(Program));
             try

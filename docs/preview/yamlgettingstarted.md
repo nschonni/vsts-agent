@@ -8,6 +8,6 @@
 - More samples coming soon. Deserialization [details here](yamldeserialization.md).
 
 # Create a definition
-- Set feature flag Build2.Yaml (already on if deployed master)
+- Set feature flag Build2.Yaml
 - Create a definition, save a variable `_yaml_preview` that points to the relative path of your YAML file. E.g. path/to/my/build.yaml
   - UI coming soon.
