@@ -1,4 +1,7 @@
-﻿steps:
+# YAML getting started - Tasks (internal only, public preview soon)
+
+```yaml
+steps:
   - task: Npm@1 # @1 indicates the task version
     name: npm install
     inputs:
@@ -7,3 +10,4 @@
     name: npm test
     inputs:
       command: test
+```
