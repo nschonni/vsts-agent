@@ -1,15 +1,15 @@
 ﻿steps:
-  # Simple script. Uses cmd.exe on Windows and Bash on macOS/Linux.
+  # Run a command line script using cmd.exe on Windows and bash on macOS and Linux.
   - script: echo hello world
     name: Simple script
 
-  # Multi-line script
+  # Multi-line script.
   - script: |
       echo hello from a...
       echo ...multi-line script
     name: Multi-line script
 
-  # Override working directory
+  # Override working directory.
   - script: cd
     name: Override working directory
     workingDirectory: $(USERPROFILE)
