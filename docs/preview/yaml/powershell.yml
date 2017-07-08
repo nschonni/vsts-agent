@@ -1,6 +1,6 @@
 ﻿steps:
   # Run a PowerShell script on Windows, macOS, and Linux. powershell must be in your PATH.
-  - powershell: Write-Host "Hello from PowerShell $($PSVersionTable.PSVersion.Major)"
+  - powershell: Write-Host "Hello from PowerShell v$($PSVersionTable.PSVersion.Major)"
     name: Simple script
 
   # Multi-line script.
@@ -44,7 +44,9 @@
     ignoreLASTEXITCODE: true
 
   # Working directory.
-  - powershell: Get-Location
+  - powershell: |
+      Write-Host "agent.homeDirectory is:"
+      Get-Location
     name: Working directory
     workingDirectory: $(agent.homeDirectory)
 

@@ -10,7 +10,7 @@
     name: Multi-line script
 
   # Working directory.
-  - script: pwd
+  - script: echo agent.homeDirectory is $PWD
     name: Working directory
     workingDirectory: $(agent.homeDirectory)
 

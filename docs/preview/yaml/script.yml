@@ -10,11 +10,11 @@
     name: Multi-line script
 
   # Working directory.
-  - script: cd
+  - script: echo agent.homeDirectory is %CD%
     name: Working directory
     workingDirectory: $(agent.homeDirectory)
     condition: and(succeeded(), eq(variables['agent.os'], 'windows_nt'))
-  - script: pwd
+  - script: echo agent.homeDirectory is $PWD
     name: Working directory
     workingDirectory: $(agent.homeDirectory)
     condition: and(succeeded(), in(variables['agent.os'], 'darwin', 'linux'))
